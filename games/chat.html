@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pingpong games : chatroom</title>
+
+    <style type="text/css">
+        .form {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-color: #f9f9f9;
+            border-top: 1px solid #78b8ef;
+            padding: 5px 10px;
+        }
+        .form .placeholder,
+        .form .input-meddage,
+        .form button {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form .input-message {
+            padding: 7px;
+            border: 1px solid #ecebeb;
+            border-radius: 4px;
+            width: -webkit-fill-available;
+        }
+        .form button {
+            width: 100%;
+            color: white;
+            padding: 7px 10px;
+            border-radius: 4px;
+            background-color: #78b8ef;
+            border: 1px solid #5a9ed8;
+        }
+        .container {
+            margin-bottom: 50px;
+        }
+        .container p {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+
+    <div class="form">
+        <form onsubmit="app.doSendMessage(); return false;">
+            <div class="placeholder">
+                <label for="message-label">Hello <b class="username"></b>. say someting:</label>
+            </div>
+            <input class="input-message" type="text" placeholder="Enter message" />
+            <button type="button">send</button>
+        </form>
+    </div>
+
+    <script src="../engine/chat.js"></script>
+</body>
+</html>

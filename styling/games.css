@@ -1,0 +1,36 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+canvas {
+    background: #eee;
+}
+.terrain-game {
+    width: fit-content;
+    display: block;
+    margin: auto;
+}
+.title {
+    padding: 12px;
+    color: #fff;
+    background: #ff9900;
+}
+.bottom {
+    padding: 12px;
+    color: #fff;
+    background: #ff9900;
+}
+.start,
+.reset {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+.start {
+    background: #00a70e;
+    color: #fff;
+}
+.reset {
+    background: #ce0e00;
+    color: #fff;
+}
