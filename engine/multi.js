@@ -1,3 +1,11 @@
+const configColorPaddleTop = "#0095DD";
+const configColorBall = '#ce0e00';
+const audioGameOversource = '../sound/game_over.wav';
+const alertGameOver = "GAME OVER AHHAHHAAH";
+const gameSpeed = 10;
+const paddleTopMovementSpeed = 7;
+const paddleBottomMovementSpeed = 7;
+
 let canvas = document.getElementById('myCanvas');
 let ctx = canvas.getContext('2d');
 let ballRadius = 10;
@@ -31,7 +39,7 @@ function keyDownTopHandler(e) {
     }
 }
 function keyUpTopHandler(e) {
-    if (e.key == 'a') {
+    if (e.key == 'd') {
         rightTopPressed = false;
     } else if (e.key == 'a') {
         leftTopPressed = false;
@@ -39,7 +47,7 @@ function keyUpTopHandler(e) {
 }
 
 function keyDownBottomHandler(e) {
-    if (e.code == 'ArrowLeft') {
+    if (e.code == 'ArrowRight') {
         rightBottomPressed = true;
     } else if (e.code == 'ArrowLeft') {
         leftBottomPressed = true;
@@ -56,29 +64,32 @@ function keyUpBottomHandler(e) {
 function drawBall() {
     ctx.beginPath();
     ctx.arc(ballPositionX, ballPositionY, ballRadius, 0, Math.PI * 2);
-    ctx.fillStyle = '#ce0e00';
+    ctx.fillStyle = configColorBall;
     ctx.fill();
     ctx.closePath();
 }
 function drawPaddleBottom() {
     ctx.beginPath();
     ctx.rect(paddleBottomPositionX, 0, paddleWidth, paddleHeight);
-    ctx.fillStyle = '#0095DD';
+    ctx.fillStyle = configColorPaddleTop;
     ctx.fill();
     ctx.closePath();
 }
 function drawPaddleTop() {
     ctx.beginPath();
     ctx.rect(paddleTopPositionX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-    ctx.fillStyle = '#0095DD';
+    ctx.fillStyle = configColorPaddleTop;
     ctx.fill();
     ctx.closePath();
 }
 
 function gameOver() {
     clearInterval(game);
-    const audioGameOver = new Audio('../sound/game_over.wav');
+    const audioGameOver = new Audio(audioGameOversource);
+    audioGameOver.addEventListener('ended', function () {
+    alert(alertGameOver)
     document.location.reload();
+})
     audioGameOver.play();
 }
 
@@ -115,14 +126,14 @@ function draw() {
         }
     }
     if (rightTopPressed && paddleTopPositionX < canvas.width - paddleWidth) {
-        paddleTopPositionX += 7;
+        paddleTopPositionX += paddleTopMovementSpeed;
     } else if (leftTopPressed && paddleTopPositionX > 0) {
-        paddleTopPositionX -= 7;
+        paddleTopPositionX -= paddleTopMovementSpeed;
     }
     if (rightBottomPressed && paddleBottomPositionX < canvas.width - paddleWidth) {
-        paddleBottomPositionX += 7;
+        paddleBottomPositionX += paddleBottomMovementSpeed;
     } else if (leftBottomPressed && paddleBottomPositionX > 0) {
-        paddleBottomPositionX -= 7;
+        paddleBottomPositionX -= paddleBottomMovementSpeed;
     }
 
     ballPositionX += dx;
@@ -130,5 +141,5 @@ function draw() {
 }
 
 function startGame() {
-    game = setInterval(draw, 10)
+    game = setInterval(draw, gameSpeed)
 }
